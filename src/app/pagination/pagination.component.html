@@ -1,13 +1,62 @@
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item" ><a class="page-link" href="#" (click)="prevPage()">Previous</a></li>
-      <li *ngIf="currentPage>1" (click)="selectPage(currentPage-1)" class="page-item"><a class="page-link" href="#">{{currentPage-1}}</a></li>
-      
-      <li class="page-item active"><a class="page-link" href="#">{{currentPage}}</a></li>
-      <li class="page-item" (click)="selectPage(currentPage+1)"><a class="page-link" href="#">{{currentPage+1}}</a></li>
-      <li class="page-item" (click)="selectPage(currentPage+1)"><a class="page-link" href="#">{{currentPage+2}}</a></li>
-      <li class="page-item"><a class="page-link" href="#">...</a></li>
+<!-- refer to http://api.artic.edu/docs/#pagination total image is 112773. calculate 8 image per page. approximately 14000 pages maximum -->
 
-      <li class="page-item"><a class="page-link" href="#" (click)="nextPage()">Next</a></li>
-    </ul>
-  </nav>
+<nav aria-label="Page navigation example">
+  <ul class="pagination">
+    <li *ngIf="currentPage != 1" class="page-item">
+      <a class="page-link" href="#" (click)="selectPage(1)">First</a>
+    </li>
+
+    <li *ngIf="currentPage != 1" class="page-item">
+      <a class="page-link" href="#" (click)="prevPage()">Previous</a>
+    </li>
+    <li
+      *ngIf="currentPage > 1"
+      (click)="selectPage(currentPage - 1)"
+      class="page-item"
+    >
+      <a class="page-link" href="#">{{ currentPage - 1 }}</a>
+    </li>
+
+    <li class="page-item active">
+      <a class="page-link" href="#">{{ currentPage }}</a>
+    </li>
+    <li
+      class="page-item"
+      *ngIf="currentPage + 1 <= 14000"
+      (click)="selectPage(currentPage + 1)"
+    >
+      <a class="page-link" href="#">{{ currentPage + 1 }}</a>
+    </li>
+    <li
+      class="page-item"
+      *ngIf="currentPage + 2 <= 14000"
+      (click)="selectPage(currentPage + 1)"
+    >
+      <a class="page-link" href="#">{{ currentPage + 2 }}</a>
+    </li>
+    <li *ngIf="currentPage+5<= 14000" class="page-item">
+      <a class="page-link" >...</a>
+    </li>
+    <li
+      *ngIf="currentPage + 4 < 14000"
+      class="page-item"
+      (click)="selectPage(13999)"
+    >
+      <a class="page-link" href="#">13999</a>
+    </li>
+    <li
+      *ngIf="currentPage + 5 < 14000"
+      class="page-item"
+      (click)="selectPage(14000)"
+    >
+      <a class="page-link" href="#">14000</a>
+    </li>
+
+    <li *ngIf="currentPage != 14000" class="page-item">
+      <a class="page-link" href="#" (click)="nextPage()">Next</a>
+    </li>
+    <li *ngIf="currentPage != 14000" class="page-item">
+      <a class="page-link" href="#" (click)="selectPage(14000)">Last</a>
+    </li>
+  </ul>
+</nav>

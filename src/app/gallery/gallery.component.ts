@@ -75,13 +75,12 @@ export class GalleryComponent implements OnInit {
     return 0;
   }
   callArt() {
-    // console.log('On page: ' + this.page);
     this.http
       .get<any>(
+        //use pagination http://api.artic.edu/docs/#pagination for better request handling, reduce computing time
         'https://api.artic.edu/api/v1/artworks?page=' +
           this.page +
-          '&limit=8&sort=' +
-          'artist_title',
+          '&limit=8',
         {
           withCredentials: false,
         }
