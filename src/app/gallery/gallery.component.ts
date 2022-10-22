@@ -1,39 +1,101 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  EventEmitter,
+} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
 })
-export class GalleryComponent implements OnInit,OnChanges {
+export class GalleryComponent implements OnInit, OnChanges {
   @Input() page = 1;
-  currentItem = [];
+  @Input() sort = 'title';
+  @Input() filterSelected: any
+  @Output() artworks = new EventEmitter<any>();
 
-  constructor( private http: HttpClient) {
-    
+  currentItem: any = [];
+  constructor(private http: HttpClient) {}
+
+  titleSort(data: [{ title: string }]) {
+    data.sort((a, b) => {
+      if (b.title < a.title) return 1;
+      if (b.title > a.title) return -1;
+      return 0;
+    });
+    return data;
   }
 
+  artisttitleSort(data: [{ artist_title: string }]) {
+    data.sort((a, b) => {
+      if (b.artist_title < a.artist_title) return 1;
+      if (b.artist_title > a.artist_title) return -1;
+      return 0;
+    });
+    return data;
+  }
+
+  dateSort(data: [{ date_start: string }]) {
+    data.sort((a, b) => {
+      if (b.date_start < a.date_start) return 1;
+      if (b.date_start > a.date_start) return -1;
+      return 0;
+    });
+    return data;
+  }
+
+  filter(artStyle: []) {
+    let numberOfFilterAdded = 0;
+    let numberofAfterCheck = 0;
+    if (this.filterSelected[0] != null) {
+      numberOfFilterAdded = this.filterSelected.concat(artStyle).length;
+      numberofAfterCheck = [...new Set(this.filterSelected.concat(artStyle))]
+        .length;
+      return numberOfFilterAdded > numberofAfterCheck ? true : false;
+    } else {
+      return true;
+    }
+    // this.filterSelected[0]!="" ?numberOfFilter = this.filterSelected.length :numberOfFilter = 0
+  }
+  gallerySort(data: any, sortBy: string) {
+    switch (sortBy) {
+      case 'title':
+        return this.titleSort(data);
+      case 'artist_title':
+        return this.artisttitleSort(data);
+      case 'date_start':
+        return this.dateSort(data);
+    }
+    return 0;
+  }
   callArt() {
-    console.log('On page: '+this.page)
+    console.log('On page: ' + this.page);
     this.http
       .get<any>(
-        'https://api.artic.edu/api/v1/artworks?page=' + this.page + '&limit=8',
+        'https://api.artic.edu/api/v1/artworks?page=' +
+          this.page +
+          '&limit=8&sort=' +
+          'artist_title',
         {
           withCredentials: false,
         }
       )
       .subscribe((data) => {
-        this.currentItem = data.data;
-        console.log(data);
+        this.artworks.emit(data.data);
+        this.currentItem = this.gallerySort(data.data, this.sort);
       });
   }
 
   ngOnInit(): void {
+    this.filterSelected = [null]
 
     this.callArt();
-   
   }
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.callArt();
   }
 }

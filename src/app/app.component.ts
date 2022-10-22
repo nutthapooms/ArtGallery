@@ -9,12 +9,23 @@ export class AppComponent {
 
   constructor(private modalService: NgbModal) {
   }
+
   currentPage = 1
-
-
+  currentSort = 'title'
+  currentfilter:any
+  currentArtworks = []
 
   changePage(page:number){
     this.currentPage = page
+  }
+  changeSort(sort:string){
+    this.currentSort = sort
+  }
+  changeFilter(filter:any){
+    this.currentfilter = filter 
+  }
+  changeCurrentArtworks(artworks:any){
+    this.currentArtworks = artworks
   }
 
   public open(modal: any): void {

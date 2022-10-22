@@ -11,13 +11,30 @@ import { SortComponent } from './sort/sort.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
-import { ImageBackupDirective } from './image-backup.directive'
+import { ImageBackupDirective } from './image-backup.directive';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent, FilterComponent, SortComponent, PaginationComponent, GalleryComponent, ArtDetailComponent, ImageBackupDirective],
-  imports: [BrowserModule, NgbModule, AppRoutingModule,HttpClientModule],
+  declarations: [
+    AppComponent,
+    HeaderComponent,
+    FilterComponent,
+    SortComponent,
+    PaginationComponent,
+    GalleryComponent,
+    ArtDetailComponent,
+    ImageBackupDirective,
+  ],
+  imports: [
+    BrowserModule,
+    NgbModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

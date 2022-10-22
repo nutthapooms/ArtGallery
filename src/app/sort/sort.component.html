@@ -1,2 +1,7 @@
-Sort by:
-<input type="option" name="sort" id="">
+<h4>Sort by:</h4>
+<select class="form-select" id='sortForm' aria-label="Default select example" (change)="setSort()">
+    <option selected>Sort by:</option>
+    <option value="title">Name</option>
+    <option value="artist_title">Artist</option>
+    <option value="date_start">Date</option>
+  </select>

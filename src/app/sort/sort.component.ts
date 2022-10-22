@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output,EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-sort',
@@ -6,9 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sort.component.scss']
 })
 export class SortComponent implements OnInit {
+  @Output() sortEvent = new EventEmitter<string>();
 
   constructor() { }
-
+  setSort(){
+    this.sortEvent.emit((<HTMLInputElement>document.getElementById('sortForm')).value);
+  }
   ngOnInit(): void {
   }
 
