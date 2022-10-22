@@ -5,6 +5,8 @@ import {
   OnInit,
   Output,
   EventEmitter,
+  SimpleChange,
+  SimpleChanges,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Component({
@@ -12,10 +14,10 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.scss'],
 })
-export class GalleryComponent implements OnInit, OnChanges {
+export class GalleryComponent implements OnInit {
   @Input() page = 1;
   @Input() sort = 'title';
-  @Input() filterSelected: any
+  @Input() filterSelected: any;
   @Output() artworks = new EventEmitter<any>();
 
   currentItem: any = [];
@@ -73,7 +75,7 @@ export class GalleryComponent implements OnInit, OnChanges {
     return 0;
   }
   callArt() {
-    console.log('On page: ' + this.page);
+    // console.log('On page: ' + this.page);
     this.http
       .get<any>(
         'https://api.artic.edu/api/v1/artworks?page=' +
@@ -91,11 +93,15 @@ export class GalleryComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
-    this.filterSelected = [null]
+    this.filterSelected = [null];
 
     this.callArt();
   }
-  ngOnChanges(): void {
-    this.callArt();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('page change: ' + changes['page']);
+    console.log('filter change: ' + changes['filterSelected']);
+    if (changes['page'] != undefined) {
+      this.callArt();
+    }
   }
 }

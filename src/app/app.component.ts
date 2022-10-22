@@ -17,6 +17,8 @@ export class AppComponent {
 
   changePage(page:number){
     this.currentPage = page
+
+    //reset filter every time page changes
     this.currentfilter = []
 
   }

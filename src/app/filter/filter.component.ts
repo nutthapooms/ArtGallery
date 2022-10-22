@@ -5,6 +5,7 @@ import {
   EventEmitter,
   Output,
   OnChanges,
+  SimpleChange,
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
@@ -13,7 +14,7 @@ import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnInit, OnChanges {
+export class FilterComponent implements OnInit{
   @Input() artworks: any = [];
   @Output() filter = new EventEmitter<any>();
 
@@ -26,8 +27,8 @@ export class FilterComponent implements OnInit, OnChanges {
   currentFilter = [];
 
   getAllArtStyles(artworks: any) {
+    
     this.artworksStyle = [''];
-
     //use for of because foreach doesn't wait for promise
     for (const artwork of artworks) {
       let temp_artworks: [] = [];
@@ -60,12 +61,10 @@ export class FilterComponent implements OnInit, OnChanges {
       }
       return result;
     });
-    // console.log(finalresult);
 
     this.artworksStyle = finalresult;
   }
 
-  unCheckAll() {}
 
   ngOnInit() {
     this.getAllArtStyles(this.artworks);
@@ -74,14 +73,13 @@ export class FilterComponent implements OnInit, OnChanges {
     });
   }
 
-  ngOnChanges(): void {
+  ngOnChanges(changes:SimpleChange) {
     this.getAllArtStyles(this.artworks);
   }
 
   onChange(email: string, event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked;
     const emailFormArray = <FormArray>this.myForm.controls['style_titles'];
-
     if (isChecked) {
       emailFormArray.push(new FormControl(email));
       this.filter.emit(this.myForm.value.style_titles);
