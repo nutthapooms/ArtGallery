@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -90,6 +91,7 @@ export class GalleryComponent implements OnInit {
         this.currentItem = this.gallerySort(data.data, this.sort);
       });
   }
+  
 
   ngOnInit(): void {
     this.filterSelected = [null];

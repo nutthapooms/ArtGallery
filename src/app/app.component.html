@@ -1,6 +1,17 @@
 <div class="container">
-<app-header></app-header>
-  <app-sort (sortEvent)="changeSort($event)"></app-sort><app-filter (filter)="changeFilter($event)" [artworks]="currentArtworks"></app-filter>
-  <app-gallery [page]="currentPage" [sort]="currentSort" [filterSelected]="currentfilter" (artworks)="changeCurrentArtworks($event)"></app-gallery>
+  <app-spinner></app-spinner>
+
+  <app-header></app-header>
+  <app-sort (sortEvent)="changeSort($event)"></app-sort
+  ><app-filter
+    (filter)="changeFilter($event)"
+    [artworks]="currentArtworks"
+  ></app-filter>
+  <app-gallery
+    [page]="currentPage"
+    [sort]="currentSort"
+    [filterSelected]="currentfilter"
+    (artworks)="changeCurrentArtworks($event)"
+  ></app-gallery>
   <app-pagination (pageEvent)="changePage($event)"></app-pagination>
 </div>

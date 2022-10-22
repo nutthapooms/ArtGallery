@@ -11,10 +11,12 @@ import { SortComponent } from './sort/sort.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { GalleryComponent } from './gallery/gallery.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule,HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ArtDetailComponent } from './art-detail/art-detail.component';
 import { ImageBackupDirective } from './image-backup.directive';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
+import { LoadingInterceptor } from './loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     GalleryComponent,
     ArtDetailComponent,
     ImageBackupDirective,
+    ProgressSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
