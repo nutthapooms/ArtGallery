@@ -98,10 +98,16 @@ export class GalleryComponent implements OnInit {
     this.callArt();
   }
   ngOnChanges(changes: SimpleChanges) {
-    console.log('page change: ' + changes['page']);
-    console.log('filter change: ' + changes['filterSelected']);
+    //detect page change
     if (changes['page'] != undefined) {
       this.callArt();
     }
+
+    //detect sort change
+    if (changes['sort'] != undefined) {
+      this.currentItem = this.gallerySort(this.currentItem, this.sort);
+
+    }
+
   }
 }
