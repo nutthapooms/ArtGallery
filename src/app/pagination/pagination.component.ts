@@ -1,5 +1,4 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { SharedService } from '../share-services.service';
 
 @Component({
   selector: 'app-pagination',
@@ -9,23 +8,20 @@ import { SharedService } from '../share-services.service';
 export class PaginationComponent implements OnInit {
   @Output() pageEvent = new EventEmitter<number>();
 
-  constructor(private sharedService: SharedService) {}
+  constructor() {}
   currentPage = 1;
   nextPage() {
     this.currentPage += 1;
     this.pageEvent.emit(this.currentPage);
-    this.sharedService.sendClickEvent();
 
   }
   prevPage() {
     this.currentPage > 1 ? (this.currentPage -= 1) : (this.currentPage = 1);
     this.pageEvent.emit(this.currentPage);
-    this.sharedService.sendClickEvent();
   }
   selectPage(page: number) {
     this.currentPage = page;
     this.pageEvent.emit(this.currentPage);
-    this.sharedService.sendClickEvent();
 
   }
   ngOnInit(): void {}
