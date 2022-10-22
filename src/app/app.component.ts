@@ -17,6 +17,8 @@ export class AppComponent {
 
   changePage(page:number){
     this.currentPage = page
+    this.currentfilter = []
+
   }
   changeSort(sort:string){
     this.currentSort = sort

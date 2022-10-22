@@ -2,7 +2,8 @@
 <h4>Filter:</h4>
 <!-- <pre>Form values: {{myForm.value | json}}</pre> -->
 <form [formGroup]="myForm">
-	<div *ngFor="let data of emails">
-		<input type="checkbox" (change)="onChange(data, $event)"> {{data}}<br>
+	<div *ngFor="let data of artworksStyle">
+		<input type="checkbox"  (change)="onChange(data.style, $event)"> {{data.style}} ({{data.Unit}})<br>
 	</div>
-</form>
+	<!-- <button (click)="unCheckAll()">test</button> -->
+</form>				

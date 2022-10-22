@@ -5,7 +5,6 @@ import {
   EventEmitter,
   Output,
   OnChanges,
-  SimpleChanges,
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
@@ -18,7 +17,7 @@ export class FilterComponent implements OnInit, OnChanges {
   @Input() artworks: any = [];
   @Output() filter = new EventEmitter<any>();
 
-  emails = this.artworks;
+  artworksStyle = this.artworks;
   myForm!: FormGroup;
 
   constructor(private fb: FormBuilder) {}
@@ -27,16 +26,46 @@ export class FilterComponent implements OnInit, OnChanges {
   currentFilter = [];
 
   getAllArtStyles(artworks: any) {
-    this.emails = [];
-    artworks.forEach((artwork: { title: string; style_titles: any }) => {
+    this.artworksStyle = [''];
+
+    //use for of because foreach doesn't wait for promise
+    for (const artwork of artworks) {
       let temp_artworks: [] = [];
       artwork.style_titles[0] != null
         ? (temp_artworks = artwork.style_titles)
         : (temp_artworks = []);
-      this.emails = this.emails.concat(temp_artworks);
+      this.artworksStyle = this.artworksStyle.concat(temp_artworks);
+    }
+    let finalresult: any = [];
+    let unitArr: any = [];
+    let existingArr: string[] = [];
+    let index = 0;
+
+
+    //reduce artworks's style to count number of duplicate styles
+    this.artworksStyle.reduce((result: any, currentValue: any) => {
+      if (
+        existingArr.find((element) => element == currentValue) == currentValue
+      ) {
+        result = currentValue;
+        finalresult[
+          finalresult.findIndex((item: any) => item.style === currentValue)
+        ].Unit += 1;
+      } else {
+        unitArr[index] = 1;
+        result = currentValue;
+        finalresult.push({ style: currentValue, Unit: 1 });
+        existingArr.push(currentValue);
+        index += 1;
+      }
+      return result;
     });
-    this.emails = [...new Set(this.emails)];
+    // console.log(finalresult);
+
+    this.artworksStyle = finalresult;
   }
+
+  unCheckAll() {}
 
   ngOnInit() {
     this.getAllArtStyles(this.artworks);
@@ -44,7 +73,8 @@ export class FilterComponent implements OnInit, OnChanges {
       style_titles: this.fb.array([]),
     });
   }
-  ngOnChanges(changes: SimpleChanges): void {
+
+  ngOnChanges(): void {
     this.getAllArtStyles(this.artworks);
   }
 
@@ -54,13 +84,11 @@ export class FilterComponent implements OnInit, OnChanges {
 
     if (isChecked) {
       emailFormArray.push(new FormControl(email));
-      // console.log(this.myForm)
-      this.filter.emit(this.myForm.value.style_titles)
+      this.filter.emit(this.myForm.value.style_titles);
     } else {
       let index = emailFormArray.controls.findIndex((x) => x.value == email);
       emailFormArray.removeAt(index);
-      this.filter.emit(this.myForm.value.style_titles)
-
+      this.filter.emit(this.myForm.value.style_titles);
     }
   }
 }
