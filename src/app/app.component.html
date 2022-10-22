@@ -1,6 +1,6 @@
 <div class="container">
 <app-header></app-header>
   <app-sort></app-sort><app-filter></app-filter>
-  <app-gallery></app-gallery>
-  <app-pagination></app-pagination>
+  <app-gallery [page]="currentPage" ></app-gallery>
+  <app-pagination (pageEvent)="changePage($event)"></app-pagination>
 </div>

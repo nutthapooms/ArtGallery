@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,6 +8,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class AppComponent {
 
   constructor(private modalService: NgbModal) {
+  }
+  currentPage = 1
+
+
+
+  changePage(page:number){
+    this.currentPage = page
   }
 
   public open(modal: any): void {
