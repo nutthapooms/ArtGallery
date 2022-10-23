@@ -23,7 +23,7 @@ export class GalleryComponent implements OnInit {
   currentItem: any = [''];
   constructor(private http: HttpClient) {}
 
-  titleSort(data: [{ title: string }]) {
+  titleSort(data: { title: string }[]) {
     data.sort((a, b) => {
       if (b.title < a.title) return 1;
       if (b.title > a.title) return -1;
@@ -32,7 +32,7 @@ export class GalleryComponent implements OnInit {
     return data;
   }
 
-  artisttitleSort(data: [{ artist_title: string }]) {
+  artisttitleSort(data: { artist_title: string }[]) {
     data.sort((a, b) => {
       if (b.artist_title < a.artist_title) return 1;
       if (b.artist_title > a.artist_title) return -1;
@@ -41,10 +41,10 @@ export class GalleryComponent implements OnInit {
     return data;
   }
 
-  dateSort(data: [{ date_start: string }]) {
+  dateSort(data: { date_start: string }[]) {
     data.sort((a, b) => {
-      if (b.date_start < a.date_start) return 1;
-      if (b.date_start > a.date_start) return -1;
+      if (parseInt(b.date_start)  < parseInt( a.date_start)) return 1;
+      if (parseInt(b.date_start)  > parseInt( a.date_start)) return -1;
       return 0;
     });
     return data;

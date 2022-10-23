@@ -20,4 +20,9 @@ describe('ArtDetailComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('return Date properly', () => {
+    expect(component.dateCheck('1900','1901')).toEqual('(1900 - 1901)')
+    expect(component.dateCheck('1900','1900')).toEqual('(1900)')
+  });
 });
