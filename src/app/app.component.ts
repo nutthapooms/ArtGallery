@@ -1,20 +1,23 @@
-import { Component } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component,Injectable } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
+@Injectable()
 export class AppComponent {
-
-  constructor(private modalService: NgbModal) {
+  constructor(
+  ) {
   }
-
+  title:string = 'ArtGallery'
   currentPage = 1
   currentSort = 'title'
   currentfilter:any
   currentArtworks = []
-
+  adding = 2
+  
   changePage(page:number){
     this.currentPage = page
 
@@ -32,8 +35,10 @@ export class AppComponent {
     this.currentArtworks = artworks
   }
 
-  public open(modal: any): void {
-    this.modalService.open(modal);
-  }
+  
 
+}
+
+function InjectableType() {
+  throw new Error('Function not implemented.');
 }
