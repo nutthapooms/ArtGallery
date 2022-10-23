@@ -63,6 +63,7 @@ export class FilterComponent implements OnInit{
     });
 
     this.artworksStyle = finalresult;
+    return this.artworksStyle
   }
 
 
@@ -77,14 +78,14 @@ export class FilterComponent implements OnInit{
     this.getAllArtStyles(this.artworks);
   }
 
-  onChange(email: string, event: Event) {
+  onChange(styles: string, event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked;
     const emailFormArray = <FormArray>this.myForm.controls['style_titles'];
     if (isChecked) {
-      emailFormArray.push(new FormControl(email));
+      emailFormArray.push(new FormControl(styles));
       this.filter.emit(this.myForm.value.style_titles);
     } else {
-      let index = emailFormArray.controls.findIndex((x) => x.value == email);
+      let index = emailFormArray.controls.findIndex((x) => x.value == styles);
       emailFormArray.removeAt(index);
       this.filter.emit(this.myForm.value.style_titles);
     }

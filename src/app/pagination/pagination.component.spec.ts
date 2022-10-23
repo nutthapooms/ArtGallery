@@ -20,4 +20,17 @@ describe('PaginationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should go to next/prev page',()=>{
+    expect(component.currentPage).toEqual(1)
+    component.nextPage()
+    expect(component.currentPage).toEqual(2)
+    component.prevPage()
+    expect(component.currentPage).toEqual(1)
+  })
+  it('should not go to PrevPage if on page1',()=>{
+    expect(component.currentPage).toEqual(1)
+    component.prevPage()
+    expect(component.currentPage).toEqual(1)
+  })
 });

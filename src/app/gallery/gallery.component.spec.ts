@@ -1,8 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 
 import { GalleryComponent } from './gallery.component';
-import { HttpClientModule } from '@angular/common/http';
+import {
+  HttpClientModule,
+  HttpEventType,
+  HttpEvent,
+} from '@angular/common/http';
 
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 describe('GalleryComponent', () => {
   let component: GalleryComponent;
@@ -10,12 +18,9 @@ describe('GalleryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports:[
-        HttpClientModule
-      ],
-      declarations: [ GalleryComponent ]
-    })
-    .compileComponents();
+      imports: [HttpClientModule, HttpClientTestingModule],
+      declarations: [GalleryComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(GalleryComponent);
     component = fixture.componentInstance;
@@ -25,4 +30,12 @@ describe('GalleryComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  // it('check connectivity',async ()=>{
+  //   expect(component.currentItem.length).toEqual(1)
+  //   component.callArt()
+  //   expect(component.currentItem.length).toEqual(8)
+
+  // })
+
 });

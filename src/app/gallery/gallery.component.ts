@@ -8,7 +8,7 @@ import {
   SimpleChange,
   SimpleChanges,
 } from '@angular/core';
-import { HttpClient,HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -20,7 +20,7 @@ export class GalleryComponent implements OnInit {
   @Input() filterSelected: any;
   @Output() artworks = new EventEmitter<any>();
 
-  currentItem: any = [];
+  currentItem: any = [''];
   constructor(private http: HttpClient) {}
 
   titleSort(data: [{ title: string }]) {
@@ -57,7 +57,7 @@ export class GalleryComponent implements OnInit {
       numberOfFilterAdded = this.filterSelected.concat(artStyle).length;
       numberofAfterCheck = [...new Set(this.filterSelected.concat(artStyle))]
         .length;
-      
+
       return numberOfFilterAdded > numberofAfterCheck ? true : false;
     } else {
       return true;
@@ -76,7 +76,7 @@ export class GalleryComponent implements OnInit {
     return 0;
   }
   callArt() {
-      this.http
+    this.http 
       .get<any>(
         //use pagination http://api.artic.edu/docs/#pagination for better request handling, reduce computing time
         'https://api.artic.edu/api/v1/artworks?page=' + this.page + '&limit=8',
@@ -84,21 +84,28 @@ export class GalleryComponent implements OnInit {
           withCredentials: false,
         }
       )
-      .subscribe((data) => {
-        this.artworks.emit(data.data);
-        this.currentItem = this.gallerySort(data.data, this.sort);
-      },error=>{
-        console.log(error)
-        this.currentItem = [{title:error.statusText,style_titles:[],artist_title:'error'}]
-      });
-    
+      .subscribe(
+        (data) => {
+          this.artworks.emit(data.data);
+          this.currentItem = this.gallerySort(data.data, this.sort);
+        },
+        (error) => {
+          console.log(error);
+          this.currentItem = [
+            {
+              title: error.statusText,
+              style_titles: [],
+              artist_title: 'error',
+            },
+          ];
+        }
+        
+      );
 
-    
   }
 
   ngOnInit(): void {
     this.filterSelected = [null];
-
     this.callArt();
   }
   ngOnChanges(changes: SimpleChanges) {
