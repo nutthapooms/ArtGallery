@@ -62,8 +62,12 @@ export class GalleryComponent implements OnInit {
     } else {
       return true;
     }
-    // this.filterSelected[0]!="" ?numberOfFilter = this.filterSelected.length :numberOfFilter = 0
   }
+
+  filterArtworks(data:any){
+    
+  }
+
   gallerySort(data: any, sortBy: string) {
     switch (sortBy) {
       case 'title':

@@ -1,7 +1,8 @@
-.for-container :not(:has(div)){
-    padding-left: 0px;    
-    padding-right: 0px;    
-
+.art-item{
+    margin: 5%;
+}
+.container{
+    display: table-row;
 }
 .row > .for-container {
     padding-left: 0px;    

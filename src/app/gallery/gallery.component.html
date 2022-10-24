@@ -1,8 +1,8 @@
-<div class="container text-center">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4" >
-    <div class="for-container col col-md-auto"*ngFor="let art of currentItem" >
-      <app-art-detail [item]="art" *ngIf="filter(art.style_titles)"></app-art-detail>
+<div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4">
+      <div class="for-container col col-md-auto"*ngFor="let art of currentItem" >
+        <app-art-detail class="art-item" [item]="art" *ngIf="filter(art.style_titles)"></app-art-detail>
+      </div>
+      
     </div>
-    
-  </div>
 </div>
