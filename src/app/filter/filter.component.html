@@ -8,8 +8,8 @@
 	</button>
 	
 	<form [formGroup]="myForm" class="dropdown-menu">
-		<div class="dropdown-item" *ngFor="let data of artworksStyle">
-			<input type="checkbox" (change)="onChange(data.style, $event)"> {{data.style}} ({{data.Unit}})<br>
+		<div class="dropdown-item" *ngFor="let data of artworksStyle" >
+			<label [attr.for]="'style_' + data.style"><input type="checkbox" [attr.id]="'style_' + data.style" (change)="onChange(data.style, $event)"> {{data.style}} ({{data.Unit}})</label><br>
 		</div>
 	</form>	
   </div>
