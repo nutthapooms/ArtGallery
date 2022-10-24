@@ -9,7 +9,12 @@ export class SortComponent implements OnInit {
   @Output() sortEvent = new EventEmitter<string>();
 
   constructor() { }
+
+  sortType:{name:string,value:string}[] = [{name:'Name',value:'title'},{name:'Artist',value:'artist_title'},{name:'Date',value:'date_start'}]
+
   setSort(){
+
+    //send sort criteria to parent
     this.sortEvent.emit((<HTMLInputElement>document.getElementById('sortForm')).value);
   }
   ngOnInit(): void {

@@ -26,7 +26,11 @@ export class ArtDetailComponent implements OnInit {
     place_of_origin: '',
   };
   artLink = '';
+
+
   dateCheck(startDate: string, endDate: string) {
+    //create year format
+
     let output = '';
     startDate == endDate
       ? (output = '(' + startDate + ')')

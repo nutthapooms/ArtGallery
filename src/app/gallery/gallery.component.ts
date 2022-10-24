@@ -51,21 +51,25 @@ export class GalleryComponent implements OnInit {
   }
 
   filter(artStyle: []) {
+    //filter each artwork base on filter criteria from filter.component
+
     let numberOfFilterAdded = 0;
     let numberofAfterCheck = 0;
     if (this.filterSelected[0] != null) {
+
+      //concat selected styles array and style_titles[] in artwork
       numberOfFilterAdded = this.filterSelected.concat(artStyle).length;
+
+      //remove duplicate style
       numberofAfterCheck = [...new Set(this.filterSelected.concat(artStyle))]
         .length;
 
+      //number of style array before remove duplicate should be > after remove dup if artwork has selected styles.
+      //else artwork's style(s) not match the selected style.     
       return numberOfFilterAdded > numberofAfterCheck ? true : false;
     } else {
       return true;
     }
-  }
-
-  filterArtworks(data:any){
-    
   }
 
   gallerySort(data: any, sortBy: string) {

@@ -10,6 +10,8 @@ export class LoaderService {
   constructor() { }
 
   setLoading(loading: boolean) {
+
+    //set spinner attribute
     this.loading = loading;
   }
 

@@ -12,8 +12,6 @@ export class ImageBackupDirective {
     
     //use on server images to handle lost connectivity
     this.el.nativeElement.src = '../assets/images/Art_Institute_of_Chicago_logo.svg';
-
-
     // this.el.nativeElement.src = "https://upload.wikimedia.org/wikipedia/commons/3/32/Art_Institute_of_Chicago_logo.svg";
   }
 }

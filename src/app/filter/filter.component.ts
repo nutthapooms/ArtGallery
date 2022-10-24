@@ -3,9 +3,7 @@ import {
   Input,
   OnInit,
   EventEmitter,
-  Output,
-  OnChanges,
-  SimpleChange,
+  Output
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 
@@ -27,6 +25,7 @@ export class FilterComponent implements OnInit{
   currentFilter = [];
 
   getAllArtStyles(artworks: any) {
+    //retrieve all style from all artworks on current page
     
     this.artworksStyle = [''];
     //use for of because foreach doesn't wait for promise
@@ -74,7 +73,7 @@ export class FilterComponent implements OnInit{
     });
   }
 
-  ngOnChanges(changes:SimpleChange) {
+  ngOnChanges() {
     this.getAllArtStyles(this.artworks);
   }
 
@@ -83,10 +82,14 @@ export class FilterComponent implements OnInit{
     const emailFormArray = <FormArray>this.myForm.controls['style_titles'];
     if (isChecked) {
       emailFormArray.push(new FormControl(styles));
+
+      //add filter critria to parent component
       this.filter.emit(this.myForm.value.style_titles);
     } else {
       let index = emailFormArray.controls.findIndex((x) => x.value == styles);
       emailFormArray.removeAt(index);
+
+      //delete filter critria to parent component
       this.filter.emit(this.myForm.value.style_titles);
     }
   }

@@ -19,14 +19,18 @@ export class LoadingInterceptor implements HttpInterceptor {
   ) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log('caught')
+    
     this.totalRequests++;
+
+    //start spinner when intercept Http request
     this.loadingService.setLoading(true);
     return next.handle(request).pipe(
       finalize(() => {
+        
         this.totalRequests--;
         if (this.totalRequests == 0) {
-          console.log('done')
+          
+          //stop spinner when no request left
           this.loadingService.setLoading(false);
         }
       })
