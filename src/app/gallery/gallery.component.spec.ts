@@ -44,11 +44,6 @@ describe('GalleryComponent', () => {
     expect(component.dateSort(mockStartDate)).toEqual([Object({date_start:'-899'}),Object({date_start:'-123'}),Object({date_start:'1900'}),Object({date_start:'1932'})])
   })
 
-  // it('check connectivity',async ()=>{
-  //   expect(component.currentItem.length).toEqual(1)
-  //   component.callArt()
-  //   expect(component.currentItem.length).toEqual(8)
-
-  // })
+  
 
 });

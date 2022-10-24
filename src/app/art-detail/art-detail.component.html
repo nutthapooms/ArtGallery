@@ -1,11 +1,11 @@
 
-<div class="card" style="width: 18rem;">
+<div class="card" >
     <div class="image-Card">
         <img [src]='artLink' class="card-img-top" alt="" appHideMissing>
     </div>
     <div class="card-body">
-      <h5 class="card-title">{{ item.title }}</h5>
-      <h5> {{item.artist_title}}</h5>
+      <p class="card-title">{{ item.title }}</p>
+      <p class="card-text"> {{item.artist_title}}</p>
       <p class="card-text">{{item.place_of_origin}} {{dateCheck(item.date_start,item.date_end)}}</p>
       <p class="card-text">{{item.medium_display}} </p>
     </div>

@@ -1,8 +1,15 @@
 
 <h4>Filter:</h4>
 <!-- <pre>Form values: {{myForm.value | json}}</pre> -->
-<form [formGroup]="myForm">
-	<div *ngFor="let data of artworksStyle">
-		<input type="checkbox" (change)="onChange(data.style, $event)"> {{data.style}} ({{data.Unit}})<br>
-	</div>
-</form>				
+			
+<div class="dropdown">
+	<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+	  Style
+	</button>
+	
+	<form [formGroup]="myForm" class="dropdown-menu">
+		<div class="dropdown-item" *ngFor="let data of artworksStyle">
+			<input type="checkbox" (change)="onChange(data.style, $event)"> {{data.style}} ({{data.Unit}})<br>
+		</div>
+	</form>	
+  </div>

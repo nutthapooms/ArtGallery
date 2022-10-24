@@ -2,11 +2,17 @@
   <app-spinner></app-spinner>
 
   <app-header></app-header>
-  <app-sort (sortEvent)="changeSort($event)"></app-sort
-  ><app-filter
-    (filter)="changeFilter($event)"
-    [artworks]="currentArtworks"
-  ></app-filter>
+
+  <tr>
+    <td><app-sort (sortEvent)="changeSort($event)"></app-sort></td>
+    <td>
+      <app-filter
+        (filter)="changeFilter($event)"
+        [artworks]="currentArtworks"
+      ></app-filter>
+    </td>
+  </tr>
+
   <app-gallery
     [page]="currentPage"
     [sort]="currentSort"

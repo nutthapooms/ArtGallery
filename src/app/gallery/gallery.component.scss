@@ -1,0 +1,9 @@
+.for-container :not(:has(div)){
+    padding-left: 0px;    
+    padding-right: 0px;    
+
+}
+.row > .for-container {
+    padding-left: 0px;    
+    padding-right: 0px; 
+}
