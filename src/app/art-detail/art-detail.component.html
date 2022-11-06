@@ -6,7 +6,8 @@
     <div class="card-body">
       <p class="card-title">{{ item.title }}</p>
       <p class="card-artist "> {{item.artist_title}}</p>
-      <p class="card-text">{{item.place_of_origin}} {{dateCheck(item.date_start,item.date_end)}}</p>
+      <p class="card-text" *ngIf="item.date_start===item.date_end">{{item.place_of_origin}} {{item.date_start | dateRange}})</p>
+      <p class="card-text" *ngIf="item.date_start!==item.date_end">{{item.place_of_origin}} {{item.date_start | dateRange}} {{item.date_end | dateEnd}}</p>
       <p class="card-text">{{item.medium_display}} </p>
     </div>
   </div>

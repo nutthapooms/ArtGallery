@@ -5,7 +5,7 @@ import { Component, OnInit, Output,EventEmitter } from '@angular/core';
   templateUrl: './sort.component.html',
   styleUrls: ['./sort.component.scss']
 })
-export class SortComponent implements OnInit {
+export class SortComponent {
   @Output() sortEvent = new EventEmitter<string>();
 
   constructor() { }
@@ -17,7 +17,6 @@ export class SortComponent implements OnInit {
     //send sort criteria to parent
     this.sortEvent.emit((<HTMLInputElement>document.getElementById('sortForm')).value);
   }
-  ngOnInit(): void {
-  }
+  
 
 }

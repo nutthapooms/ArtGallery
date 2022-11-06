@@ -5,7 +5,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss'],
 })
-export class PaginationComponent implements OnInit {
+export class PaginationComponent {
   @Output() pageEvent = new EventEmitter<number>();
 
   constructor() {}
@@ -24,5 +24,4 @@ export class PaginationComponent implements OnInit {
     this.pageEvent.emit(this.currentPage);
 
   }
-  ngOnInit(): void {}
 }

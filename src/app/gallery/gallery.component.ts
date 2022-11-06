@@ -9,6 +9,7 @@ import {
   SimpleChanges,
 } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+// import { ApiCallService } from '../api-call.service';
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',

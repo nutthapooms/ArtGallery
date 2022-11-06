@@ -6,6 +6,7 @@ import {
   Output
 } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
+import  {testing2} from '../model'
 
 @Component({
   selector: 'app-filter',
@@ -19,11 +20,14 @@ export class FilterComponent implements OnInit{
   artworksStyle = this.artworks;
   myForm!: FormGroup;
 
+  
   constructor(private fb: FormBuilder) {}
   selectedItemsList = [];
   checkedIDs = [];
   currentFilter = [];
-
+  testing2: testing2 = {
+    name : 'poom'
+  }
   getAllArtStyles(artworks: any) {
     //retrieve all style from all artworks on current page
     
@@ -79,15 +83,15 @@ export class FilterComponent implements OnInit{
 
   onChange(styles: string, event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked;
-    const emailFormArray = <FormArray>this.myForm.controls['style_titles'];
+    const filterFormArray = <FormArray>this.myForm.controls['style_titles'];
     if (isChecked) {
-      emailFormArray.push(new FormControl(styles));
+      filterFormArray.push(new FormControl(styles));
 
       //add filter critria to parent component
       this.filter.emit(this.myForm.value.style_titles);
     } else {
-      let index = emailFormArray.controls.findIndex((x) => x.value == styles);
-      emailFormArray.removeAt(index);
+      let index = filterFormArray.controls.findIndex((x) => x.value == styles);
+      filterFormArray.removeAt(index);
 
       //delete filter critria to parent component
       this.filter.emit(this.myForm.value.style_titles);

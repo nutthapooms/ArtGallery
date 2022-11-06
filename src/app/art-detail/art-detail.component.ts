@@ -27,16 +27,6 @@ export class ArtDetailComponent implements OnInit {
   };
   artLink = '';
 
-
-  dateCheck(startDate: string, endDate: string) {
-    //create year format
-
-    let output = '';
-    startDate == endDate
-      ? (output = '(' + startDate + ')')
-      : (output = '(' + startDate + ' - ' + endDate + ')');
-    return output;
-  }
   constructor() {}
   ngOnInit(): void {
     try {
