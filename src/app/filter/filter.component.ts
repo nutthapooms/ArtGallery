@@ -3,34 +3,40 @@ import {
   Input,
   OnInit,
   EventEmitter,
-  Output
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import  {testing2} from '../model'
+import {
+  FormGroup,
+  FormBuilder,
+  FormArray,
+  FormControl,
+  MinLengthValidator,
+} from '@angular/forms';
+import { testing2 } from '../model';
 
 @Component({
   selector: 'app-filter',
   templateUrl: './filter.component.html',
   styleUrls: ['./filter.component.scss'],
 })
-export class FilterComponent implements OnInit{
+export class FilterComponent implements OnInit {
   @Input() artworks: any = [];
   @Output() filter = new EventEmitter<any>();
 
   artworksStyle = this.artworks;
   myForm!: FormGroup;
 
-  
   constructor(private fb: FormBuilder) {}
   selectedItemsList = [];
   checkedIDs = [];
   currentFilter = [];
   testing2: testing2 = {
-    name : 'poom'
-  }
+    name: 'poom',
+  };
   getAllArtStyles(artworks: any) {
     //retrieve all style from all artworks on current page
-    
+
     this.artworksStyle = [''];
     //use for of because foreach doesn't wait for promise
     for (const artwork of artworks) {
@@ -44,7 +50,6 @@ export class FilterComponent implements OnInit{
     let unitArr: any = [];
     let existingArr: string[] = [];
     let index = 0;
-
 
     //reduce artworks's style to count number of duplicate styles
     this.artworksStyle.reduce((result: any, currentValue: any) => {
@@ -66,9 +71,8 @@ export class FilterComponent implements OnInit{
     });
 
     this.artworksStyle = finalresult;
-    return this.artworksStyle
+    return this.artworksStyle;
   }
-
 
   ngOnInit() {
     this.getAllArtStyles(this.artworks);
@@ -77,20 +81,25 @@ export class FilterComponent implements OnInit{
     });
   }
 
-  ngOnChanges() {
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['artworks'] != undefined) {
+      this.myForm = this.fb.group({
+        style_titles: this.fb.array([]),
+      });
+    }
     this.getAllArtStyles(this.artworks);
   }
-
   onChange(styles: string, event: Event) {
     const isChecked = (<HTMLInputElement>event.target).checked;
     const filterFormArray = <FormArray>this.myForm.controls['style_titles'];
     if (isChecked) {
       filterFormArray.push(new FormControl(styles));
-
       //add filter critria to parent component
       this.filter.emit(this.myForm.value.style_titles);
     } else {
-      let index = filterFormArray.controls.findIndex((x) => x.value == styles);
+      let index = filterFormArray.controls.findIndex(
+        (x) => x.value == styles
+      );
       filterFormArray.removeAt(index);
 
       //delete filter critria to parent component

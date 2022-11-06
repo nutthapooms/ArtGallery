@@ -118,6 +118,7 @@ export class GalleryComponent implements OnInit {
     this.callArt();
   }
   ngOnChanges(changes: SimpleChanges) {
+
     //detect page change
     if (changes['page'] != undefined) {
       this.callArt();
