@@ -18,6 +18,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerComponent } from './progress-spinner/progress-spinner.component';
 import { LoadingInterceptor } from './loading.interceptor';
 import { DateRangePipe, DateEndPipe } from './date-range.pipe';
+import { ApiCallService } from './api-call.service';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DateRangePipe, DateEndPipe } from './date-range.pipe';
     ProgressSpinnerComponent,
     DateRangePipe,
     DateEndPipe,
+    
   ],
   imports: [
     BrowserModule,
@@ -40,8 +42,10 @@ import { DateRangePipe, DateEndPipe } from './date-range.pipe';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    
   ],
   providers: [
+    ApiCallService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: LoadingInterceptor,

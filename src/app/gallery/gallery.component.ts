@@ -8,8 +8,9 @@ import {
   SimpleChange,
   SimpleChanges,
 } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-// import { ApiCallService } from '../api-call.service';
+// import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { ApiCallService } from '../api-call.service';
+import {imageArray} from '../model'
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
@@ -22,7 +23,7 @@ export class GalleryComponent implements OnInit {
   @Output() artworks = new EventEmitter<any>();
 
   currentItem: any = [''];
-  constructor(private http: HttpClient) {}
+  constructor(private http: ApiCallService) {}
 
   titleSort(data: { title: string }[]) {
     data.sort((a, b) => {
@@ -86,7 +87,7 @@ export class GalleryComponent implements OnInit {
   }
   callArt() {
     this.http 
-      .get<any>(
+      .get(
         //use pagination http://api.artic.edu/docs/#pagination for better request handling, reduce computing time
         'https://api.artic.edu/api/v1/artworks?page=' + this.page + '&limit=8',
         {
@@ -95,8 +96,8 @@ export class GalleryComponent implements OnInit {
       )
       .subscribe(
         (data) => {
-          this.artworks.emit(data.data);
-          this.currentItem = this.gallerySort(data.data, this.sort);
+          this.artworks.emit(data['data']);
+          this.currentItem = this.gallerySort(data['data'], this.sort);
         },
         (error) => {
           console.log(error);

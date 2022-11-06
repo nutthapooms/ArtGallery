@@ -13,7 +13,6 @@ import {
   FormControl,
   MinLengthValidator,
 } from '@angular/forms';
-import { testing2 } from '../model';
 
 @Component({
   selector: 'app-filter',
@@ -31,9 +30,7 @@ export class FilterComponent implements OnInit {
   selectedItemsList = [];
   checkedIDs = [];
   currentFilter = [];
-  testing2: testing2 = {
-    name: 'poom',
-  };
+
   getAllArtStyles(artworks: any) {
     //retrieve all style from all artworks on current page
 
