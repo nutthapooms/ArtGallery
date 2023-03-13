@@ -1,6 +1,6 @@
 runtime: python311 # or another supported version
 
-instance_class: B1
+instance_class: F1
 
 env_variables:
   BUCKET_NAME: "example-gcs-bucket"
@@ -12,3 +12,13 @@ handlers:
   upload: dist/art-gallery/index.html
 - url: /
   static_dir: dist/art-gallery
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
