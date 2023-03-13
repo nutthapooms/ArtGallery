@@ -1,0 +1,24 @@
+runtime: python311 # or another supported version
+
+instance_class: B1
+
+env_variables:
+  BUCKET_NAME: "example-gcs-bucket"
+
+handlers:
+# Matches requests to /images/... to files in static/images/...
+- url: /
+  static_files: dist/art-gallery/index.html
+  upload: dist/art-gallery/index.html
+- url: /
+  static_dir: dist/art-gallery
+
+skip_files:
+  - e2e/
+  - node_modules/
+  - src/
+  - ^(.*/)?\..*$
+  - ^(.*/)?.*\.json
+  - ^(.*/)?.*\.md$
+  - ^(.*/)?.*\.yaml$
+  - ^LICENSE
